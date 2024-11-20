@@ -54,7 +54,7 @@ export class BM25Retriever extends BaseRetriever {
     scoredDocs.sort((a, b) => b.score - a.score);
 
     return scoredDocs.slice(0, this.k).map((item) => new Document({
-      id: item.document.id,
+      ...item.document.id && { id: item.document.id },
       pageContent: item.document.pageContent,
       metadata: {
         score: item.score,
